@@ -1,0 +1,31 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "env": {
+    "browser": true
+  },
+  "plugins": [
+    "compat",
+    "prettier"
+  ],
+  "rules": {
+    "compat/compat": "error",
+    "prettier/prettier": "error",
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": [ "Link" ],
+      "specialLink": [ "to" ]
+    }],
+    "import/prefer-default-export": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "config/webpack.config.production.js"
+      }
+    },
+    "polyfills": ["promises"]
+  }
+}
