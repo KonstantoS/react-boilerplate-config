@@ -73,7 +73,7 @@ module.exports = {
             {
               loader: 'sass-loader',
               options: {
-                includePaths: paths.sass,
+                includePaths: [paths.sass],
               },
             },
           ],
@@ -81,8 +81,12 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        exclude: [paths.publicFiles, /antwerp/],
+        exclude: [paths.publicFiles],
         loader: 'svg-sprite-loader',
+      },
+      {
+        include: [paths.publicFiles],
+        loader: 'file-loader',
       },
     ],
   },

@@ -55,6 +55,10 @@ module.exports = {
           },
         ],
       },
+      {
+        include: [paths.publicFiles],
+        loader: 'file-loader',
+      },
     ],
   },
   plugins: [
