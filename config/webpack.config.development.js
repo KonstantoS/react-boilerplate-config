@@ -13,10 +13,12 @@ module.exports = {
     filename: path.join('js', '[name].js'),
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx'],
     modules: [paths.nodeModules, paths.src],
     alias: {
       config: paths.appConfig,
+      static: path.publicFiles,
+      public: path.publicFiles,
     },
   },
   module: {
@@ -50,7 +52,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: paths.scss,
+              includePaths: [paths.scss],
             },
           },
         ],

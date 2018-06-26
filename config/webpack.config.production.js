@@ -23,10 +23,12 @@ module.exports = {
     filename: path.join('js', '[name].[chunkhash].js'),
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx'],
     modules: [paths.nodeModules, paths.src],
     alias: {
       config: paths.appConfig,
+      static: path.publicFiles,
+      public: path.publicFiles,
     },
   },
   module: {
