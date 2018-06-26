@@ -17,8 +17,8 @@ module.exports = {
     modules: [paths.nodeModules, paths.src],
     alias: {
       config: paths.appConfig,
-      static: path.publicFiles,
-      public: path.publicFiles,
+      static: paths.publicFiles,
+      public: paths.publicFiles,
     },
   },
   module: {
