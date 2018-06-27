@@ -4,6 +4,6 @@ import { render } from 'react-dom';
 
 const rootElement = document.getElementById('root');
 
-const application = hot(<h1>Hi there!</h1>);
+const App = hot(module)(() => <h1>Hi there!</h1>);
 
-render(application, rootElement);
+render(<App />, rootElement);
