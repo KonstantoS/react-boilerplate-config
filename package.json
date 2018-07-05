@@ -24,7 +24,8 @@
     "prettier": "prettier '{config,src,webpack}/**/*.{js,jsx}' --write",
     "stylelint": "stylelint 'src/**/*.scss'",
     "precommit": "lint-staged",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "analyze": "webpack --config config/webpack.config.production.js --analyze"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -37,6 +38,8 @@
     ]
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.51",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",

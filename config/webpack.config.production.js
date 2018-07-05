@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const paths = require('./paths');
 
@@ -75,7 +76,7 @@ module.exports = {
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [paths.sass],
+                includePaths: [paths.sсss],
               },
             },
           ],
@@ -92,16 +93,22 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    extractCSS,
-    extractSCSS,
-    new HtmlWebpackPlugin({
-      template: path.join(paths.publicFiles, 'index.html'),
-      minify: {
-        collapseWhitespace: true,
-      },
-    }),
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
-    new UglifyJsPlugin(),
-  ],
+  plugins: (() => {
+    const plugins = [
+      extractCSS,
+      extractSCSS,
+      new HtmlWebpackPlugin({
+        template: path.join(paths.publicFiles, 'index.html'),
+        minify: {
+          collapseWhitespace: true,
+        },
+      }),
+      new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+      new UglifyJsPlugin(),
+    ];
+    if (process.argv.includes('--analyze')) {
+      plugins.push(new BundleAnalyzerPlugin());
+    }
+    return plugins;
+  })(),
 };
