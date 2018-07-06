@@ -16,12 +16,25 @@ const extractSCSS = new ExtractTextPlugin(cssOutputPath('main'));
 module.exports = {
   mode: 'production',
   entry: {
-    main: ['@babel/polyfill', paths.entryPoint],
+    main: paths.entryPoint,
+    core: ['@babel/polyfill', 'react', 'react-dom', 'react-router-dom'],
   },
   output: {
     path: paths.outputPath,
     publicPath: '/',
     filename: path.join('js', '[name].[chunkhash].js'),
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        core: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'core',
+          chunks: 'initial',
+          enforce: true,
+        },
+      },
+    },
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -89,6 +102,7 @@ module.exports = {
       },
       {
         include: [paths.publicFiles],
+        exclude: [path.join(paths.publicFiles, 'index.html')],
         loader: 'file-loader',
       },
     ],

@@ -19,13 +19,12 @@
     "release:development": "npm run clean && npm run build:development",
     "release:staging": "npm run clean && npm run build:staging",
     "release:production": "npm run clean && npm run build:production",
-    "analyzer": "cross-env BABEL_ENV=production PROJECT_ENV=production webpack --config config/webpack.config.production.js",
+    "analyzer": "cross-env BABEL_ENV=production PROJECT_ENV=production webpack --config config/webpack.config.production.js --analyze",
     "eslint": "eslint config src webpack --ext .js --ext .jsx",
     "prettier": "prettier '{config,src,webpack}/**/*.{js,jsx}' --write",
     "stylelint": "stylelint 'src/**/*.scss'",
     "precommit": "lint-staged",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "analyze": "webpack --config config/webpack.config.production.js --analyze"
+    "commitmsg": "commitlint -e $GIT_PARAMS"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -42,7 +41,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-hot-loader": "^4.3.3",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
@@ -78,6 +76,7 @@
     "node-sass": "^4.9.0",
     "postcss-loader": "^2.1.5",
     "prettier": "^1.13.5",
+    "react-hot-loader": "^4.3.3",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
