@@ -59,6 +59,7 @@ module.exports = {
       },
       {
         include: [paths.publicFiles],
+        exclude: [path.join(paths.publicFiles, 'index.html')],
         loader: 'file-loader',
       },
     ],

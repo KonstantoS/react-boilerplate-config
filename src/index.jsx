@@ -1,9 +1,8 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 import { render } from 'react-dom';
 
-const rootElement = document.getElementById('root');
+import App from 'containers';
 
-const App = hot(module)(() => <h1>Hi there!</h1>);
+const rootElement = document.getElementById('root');
 
 render(<App />, rootElement);

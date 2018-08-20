@@ -1,10 +1,15 @@
 {
-  "plugins": ["react-hot-loader/babel"],
+  "plugins": [
+    "react-hot-loader/babel",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-syntax-import-meta",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-json-strings"
+  ],
   "presets": [
     ["@babel/preset-env", {
       "modules": false
     }],
-    "@babel/preset-stage-3",
     "@babel/preset-react"
   ],
   "env": {
@@ -13,6 +18,10 @@
         "@babel/plugin-transform-react-constant-elements",
         "@babel/plugin-transform-react-inline-elements",
         "babel-plugin-transform-react-remove-prop-types",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-syntax-import-meta",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-json-strings"
       ]
     }
   }
