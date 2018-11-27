@@ -2,16 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const paths = require('./paths');
-
-const cssOutputPath = name => path.join('css', `${name}.[hash].css`);
-
-const extractCSS = new ExtractTextPlugin(cssOutputPath('vendor'));
-const extractSCSS = new ExtractTextPlugin(cssOutputPath('main'));
 
 module.exports = {
   mode: 'production',
@@ -26,12 +23,16 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
-        core: {
-          test: /[\\/]node_modules[\\/]/,
+        default: false,
+        vendor: false,
+        react: {
+          test: /[\\/]node_modules[\\/]react(-router)?(-dom)?[\\/]/,
           name: 'core',
-          chunks: 'initial',
+          chunks: 'all',
           enforce: true,
+          priority: 1,
         },
       },
     },
@@ -54,46 +55,42 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: extractCSS.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [autoprefixer],
-              },
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer],
             },
-          ],
-        }),
+          },
+        ],
       },
       {
         test: /\.scss$/,
-        loader: extractSCSS.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                namedExport: true,
-                localIdentName: '[hash:base64:5]',
-              },
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              namedExport: true,
+              localIdentName: '[hash:base64:5]',
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [autoprefixer],
-              },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer],
             },
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [paths.sсss],
-              },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [paths.sсss],
             },
-          ],
-        }),
+          },
+        ],
       },
       {
         test: /\.svg$/,
@@ -109,8 +106,11 @@ module.exports = {
   },
   plugins: (() => {
     const plugins = [
-      extractCSS,
-      extractSCSS,
+      new MiniCssExtractPlugin({
+        filename: path.join('css', `[name].[hash].css`),
+        chunkFilename: path.join('css', `[id].[hash].css`),
+      }),
+      new OptimizeCSSAssetsPlugin({}),
       new HtmlWebpackPlugin({
         template: path.join(paths.publicFiles, 'index.html'),
         minify: {
