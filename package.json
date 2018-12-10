@@ -22,9 +22,7 @@
     "analyzer": "cross-env BABEL_ENV=production PROJECT_ENV=production webpack --config config/webpack.config.production.js --analyze",
     "eslint": "eslint config src webpack --ext .js --ext .jsx",
     "prettier": "prettier '{config,src,webpack}/**/*.{js,jsx}' --write",
-    "stylelint": "stylelint 'src/**/*.scss'",
-    "precommit": "lint-staged",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "stylelint": "stylelint 'src/**/*.scss'"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -96,5 +94,11 @@
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   }
 }

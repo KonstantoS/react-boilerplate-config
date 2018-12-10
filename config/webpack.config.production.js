@@ -39,7 +39,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    modules: [paths.nodeModules, paths.src],
+    modules: ['node_modules', paths.src],
     alias: {
       config: paths.appConfig,
       static: paths.publicFiles,
@@ -87,7 +87,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [paths.sсss],
+              includePaths: [paths.scss],
             },
           },
         ],

@@ -14,7 +14,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    modules: [paths.nodeModules, paths.src],
+    modules: ['node_modules', paths.src],
     alias: {
       config: paths.appConfig,
       static: paths.publicFiles,
