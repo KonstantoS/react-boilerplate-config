@@ -20,8 +20,8 @@
     "release:staging": "npm run clean && npm run build:staging",
     "release:production": "npm run clean && npm run build:production",
     "analyzer": "cross-env BABEL_ENV=production PROJECT_ENV=production webpack --config config/webpack.config.production.js --analyze",
-    "eslint": "eslint config src webpack --ext .js --ext .jsx",
-    "prettier": "prettier '{config,src,webpack}/**/*.{js,jsx}' --write",
+    "eslint": "eslint config src --ext .js --ext .jsx",
+    "prettier": "prettier '{config,src}/**/*.{js,jsx}' --write",
     "stylelint": "stylelint 'src/**/*.scss'"
   },
   "lint-staged": {
